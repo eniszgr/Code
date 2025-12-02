@@ -1,27 +1,31 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { text } = req.body;
 
   if (!text || text.trim().length === 0) {
     return res.status(400).json({ error: "text alanı gerekli" });
   }
 
-  // Şimdilik basit bir sahte sınıflandırma yapıyoruz
-  const lower = text.toLowerCase();
-  let label = "Genel";
+  try {
+    // Python FastAPI servisine istek
+    const response = await axios.post(
+      "http://localhost:8000/predict/",
+      { text }
+    );
 
-  if (lower.includes("sipariş")) label = "Müşteri Hizmetleri";
-  if (lower.includes("hata")) label = "Teknik Destek";
+    res.json({
+      input_text: text,
+      label: response.data.label,
+      score: response.data.score
+    });
 
-  res.json({
-    input_text: text,
-    label,
-    score: 0.5,
-    note: "Bu yanıt placeholder’dır. Python model bağlanınca gerçek sonuç dönecek."
-  });
+  } catch (error) {
+    console.error("Python servis hatası:", error.message);
+    res.status(500).json({ error: "Python servise bağlanılamadı" });
+  }
 });
 
 module.exports = router;
-

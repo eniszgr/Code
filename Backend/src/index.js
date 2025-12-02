@@ -5,6 +5,8 @@ const helmet = require('helmet');  // for security
 const express = require('express');
 
 const app = express();
+// Read HOST and PORT from .env (fall back to safe defaults)
+const HOST = process.env.HOST;
 const PORT = process.env.PORT;
 
 app.use(helmet());
@@ -19,6 +21,6 @@ app.get('/', (req, res) => {
 app.use('/api/health', require('./routes/health'));
 app.use('/api/classify', require('./routes/classify'));
 
-app.listen(PORT, () => {
-  console.log(`Server http://localhost:${PORT} üzerinde çalışıyor`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server http://${HOST}:${PORT} üzerinde çalışıyor`);
 });

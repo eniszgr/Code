@@ -1,26 +1,32 @@
+// backend/routes/classify.js
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
-router.post('/', (req, res) => {
+const PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL; // Python servisi URL
+
+router.post('/', async (req, res) => {
   const { text } = req.body;
 
   if (!text || text.trim().length === 0) {
     return res.status(400).json({ error: "text alanı gerekli" });
   }
 
-  // Şimdilik basit bir sahte sınıflandırma yapıyoruz
-  const lower = text.toLowerCase();
-  let label = "Genel";
+  try {
+    // Python FastAPI servisine POST isteği
+    const response = await axios.post(PYTHON_SERVICE_URL, { text });
 
-  if (lower.includes("sipariş")) label = "Müşteri Hizmetleri";
-  if (lower.includes("hata")) label = "Teknik Destek";
+    // Python'dan gelen cevabı direkt frontend'e gönder
+    res.json({
+      input_text: text,
+      label: response.data.label,
+      score: response.data.score
+    });
 
-  res.json({
-    input_text: text,
-    label,
-    score: 0.5,
-    note: "Bu yanıt placeholder’dır. Python model bağlanınca gerçek sonuç dönecek."
-  });
+  } catch (error) {
+    console.error("Python servise bağlanırken hata:", error.message);
+    res.status(500).json({ error: "Python servise bağlanılamadı" });
+  }
 });
 
 module.exports = router;
