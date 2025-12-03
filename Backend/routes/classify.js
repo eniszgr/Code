@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
   try {
     // Python FastAPI servisine istek
     const response = await axios.post(
-      "http://localhost:8000/predict/",
+      process.env.PYTHON_SERVICES_URL +"/predict/",
       { text }
     );
 
