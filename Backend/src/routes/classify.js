@@ -36,12 +36,13 @@ router.post('/', async (req, res) => {
 
     // Python FastAPI servisine POST isteği
     const response = await axios.post(PREDICT_URL, { text });
+    console.log('Python servisinden cevap alındı:', response.data);
 
     // Python'dan gelen cevabı direkt frontend'e gönder
     res.json({
       input_text: text,
-      label: response.data.label,
-      score: response.data.score
+      label: response.data.Department,
+      score: response.data.Predict_Score
     });
 
   } catch (error) {

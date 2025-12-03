@@ -15,5 +15,5 @@ def predict(item: InputText): #input type is InputText from body
 
     return {
         "Department": department,
-        "Predict Score": 0.91
+        "Predict_Score": 0.91
     }
