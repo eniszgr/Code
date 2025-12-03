@@ -5,7 +5,8 @@ const helmet = require('helmet');  // for security
 const express = require('express');
 
 const app = express();
-// Read HOST and PORT from .env (fall back to safe defaults)
+
+// Pull from .env
 const HOST = process.env.HOST;
 const PORT = process.env.PORT;
 

@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Python FastAPI servisine istek
+    // Request to Python FastAPI service
     const response = await axios.post(
       process.env.PYTHON_SERVICES_URL +"/predict/",
       { text }
