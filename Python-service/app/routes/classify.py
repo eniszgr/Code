@@ -1,19 +1,19 @@
 from fastapi import APIRouter
-from app.models.input_model import InputText
+from app.models.input_model import InputText #import model
 
-router = APIRouter(prefix="/predict", tags=["Classify"])
+router = APIRouter(prefix="/predict")
 
 @router.post("/")
-def predict(item: InputText):
-    text = item.text.lower()
-    label = "Genel"
+def predict(item: InputText): #input type is InputText from body
+    text = item.text.lower() #reach text from item object
+    department = "Genel"
 
     if "sipariş" in text:
-        label = "Müşteri Hizmetleri"
+        department = "Müşteri Hizmetleri"
     if "hata" in text:
-        label = "Teknik Destek"
+        department = "Teknik Destek"
 
     return {
-        "label": label,
-        "score": 0.91
+        "Department": department,
+        "Predict Score": 0.91
     }

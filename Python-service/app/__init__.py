@@ -1,1 +1,1 @@
-# python -m app.main ile çalıştırabilmem için bu dosya gerekiyor
+#this file is required to works file python -m app.main 

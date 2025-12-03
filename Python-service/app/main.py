@@ -4,23 +4,24 @@ from app.routes import classify
 from dotenv import load_dotenv
 import os
 
-# .env dosyasını yükle
+#load .env file 
 load_dotenv()
 
-HOST = os.getenv("HOST", "127.0.0.1")
-PORT = int(os.getenv("PORT", 8000))
+#pull variables from .env
+HOST = os.getenv("HOST")
+PORT = int(os.getenv("PORT"))
 
 app = FastAPI(title="Python Model Service")
 
 # Routers
-app.include_router(classify.router)
+app.include_router(classify.router) #router variable from classify.py
 
 @app.get("/hello")
 def hello():
     return {"message": "Hello from Python FastAPI!"}
 
 
-# Uvicorn'u .env'den otomatik çalıştırmak için:
+# to run shortly = python -m app.main 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
