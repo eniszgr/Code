@@ -3,6 +3,7 @@ require('dotenv').config();
 const cors = require('cors'); //communication between domains 
 const helmet = require('helmet');  // for security 
 const express = require('express');
+const hf_classifier = require('./routes/hf_classifier');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/health', require('./routes/health'));
 app.use('/api/classify', require('./routes/classify'));
+app.use('/api/hf_predict', require('./routes/hf_classifier'));
 
 app.listen(PORT, HOST, () => {
   console.log(`Server http://${HOST}:${PORT} üzerinde çalışıyor`);

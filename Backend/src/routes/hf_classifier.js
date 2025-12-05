@@ -12,14 +12,16 @@ router.post('/', async (req, res) => {
   try {
     // Request to Python FastAPI service
     const response = await axios.post(
-      process.env.PYTHON_SERVICES_URL +"/siniflandirma/",
+      process.env.PYTHON_SERVICE_URL +"/siniflandirma/",
       { text }
     );
+    console.log("HF Response:", response.data);
 
     res.json({
-      input_text: text,
-      label: response.data.label,
-      score: response.data.score
+      kullanıcı_girdisi: response.data.original_text,
+      duzeltilmis_metin: response.data.fixed_text,
+      tahmin_departmani: response.data.department,
+      tahmin_olasiligi: response.data.score
     });
 
   } catch (error) {
