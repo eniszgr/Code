@@ -15,7 +15,6 @@ router.post('/', async (req, res) => {
       process.env.PYTHON_SERVICE_URL +"/siniflandirma/",
       { text }
     );
-    console.log("HF Response:", response.data);
 
     res.json({
       kullanıcı_girdisi: response.data.original_text,

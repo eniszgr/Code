@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
   res.send('Express backend çalışıyor! 🚀');
 });
 
-app.use('/api/health', require('./routes/health'));
 app.use('/api/classify', require('./routes/classify'));
 app.use('/api/hf_predict', require('./routes/hf_classifier'));
 
