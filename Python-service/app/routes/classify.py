@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.models.input_model import InputText #import model
+from app.models.input_model import InputText 
 
 router = APIRouter(prefix="/predict")
 
