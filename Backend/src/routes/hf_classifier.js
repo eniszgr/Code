@@ -20,6 +20,7 @@ router.post('/', async (req, res) => {
       kullanıcı_girdisi: response.data.original_text,
       duzeltilmis_metin: response.data.fixed_text,
       tahmin_departmani: response.data.department,
+      duygu_durumu: response.data.duygu,
       tahmin_olasiligi: response.data.score
     });
 
