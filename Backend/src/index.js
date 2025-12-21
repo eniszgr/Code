@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/classify', require('./routes/classify'));
 app.use('/api/hf_predict', require('./routes/hf_classifier'));
+app.use('/api/mail_predict', require('./routes/mail_predict'));
+app.use('/api/read&send_mail', require('./routes/read&send_mail'));
 
 app.listen(PORT, HOST, () => {
   console.log(`Server http://${HOST}:${PORT} üzerinde çalışıyor`);

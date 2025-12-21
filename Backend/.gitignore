@@ -2,3 +2,4 @@
 node_modules
 mail/credentials.json
 mail/token.json
+src/routes/read&send_mail.js
